@@ -1,0 +1,9 @@
+lastUpgrade=00964
+proj.pluginVersion=0.9.64
+proj.AppId=1083620626455
+and.BundleId=com.ghostszmusic.worlddefer
+proj.classDir=Assets
+proj.ConstantsClassName=GPGSIds
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--%0d%0aGoogle+Play+game+services+IDs.%0d%0aSave+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.%0d%0a--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--+app_id+--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e1083620626455%3c%2fstring%3e%0d%0a++%3c%21--+package_name+--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.ghostszmusic.worlddefer%3c%2fstring%3e%0d%0a++%3c%21--+achievement+Millionaire%27s+Club+--%3e%0d%0a++%3cstring+name%3d%22achievement_millionaires_club%22+translatable%3d%22false%22%3eCgkIl6DK5sQfEAIQAA%3c%2fstring%3e%0d%0a++%3c%21--+achievement+Highscore+King%21+--%3e%0d%0a++%3cstring+name%3d%22achievement_highscore_king%22+translatable%3d%22false%22%3eCgkIl6DK5sQfEAIQAg%3c%2fstring%3e%0d%0a++%3c%21--+achievement+G%2b+Membership+--%3e%0d%0a++%3cstring+name%3d%22achievement_g_membership%22+translatable%3d%22false%22%3eCgkIl6DK5sQfEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--+achievement+GhostMusic+Memeber+--%3e%0d%0a++%3cstring+name%3d%22achievement_ghostmusic_memeber%22+translatable%3d%22false%22%3eCgkIl6DK5sQfEAIQBA%3c%2fstring%3e%0d%0a++%3c%21--+achievement+Billionaire%27s+Boys+Club+--%3e%0d%0a++%3cstring+name%3d%22achievement_billionaires_boys_club%22+translatable%3d%22false%22%3eCgkIl6DK5sQfEAIQBQ%3c%2fstring%3e%0d%0a++%3c%21--+leaderboard+World+Defer+Leaders+--%3e%0d%0a++%3cstring+name%3d%22leaderboard_world_defer_leaders%22+translatable%3d%22false%22%3eCgkIl6DK5sQfEAIQBg%3c%2fstring%3e%0d%0a%3c%2fresources%3e%0d%0a
+and.ClientId=1083620626455-09glv15u3rbqgq6ronfna3t04gcd507n.apps.googleusercontent.com
+android.SetupDone=true
