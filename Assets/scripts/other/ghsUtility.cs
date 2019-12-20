@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.Networking;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 [System.Serializable]
 public class ghsObj{
@@ -154,10 +156,9 @@ public class ghsUtility : MonoBehaviour {
         Dictionary<string, string> headers = form.headers;
 
         form.AddField("user_login", userName);
-        form.AddField("user_password", password); 
-
-        WWW www = new WWW(url, form);
-        StartCoroutine(getData(www));
+        form.AddField("user_password", password);
+        
+        StartCoroutine(getData(url, form, true));
 
     }
 
@@ -176,9 +177,8 @@ public class ghsUtility : MonoBehaviour {
 
         form.AddField("user_login", token);
         form.AddField("user_password", score);
-
-        WWW www = new WWW(url, form);
-        StartCoroutine(getData(www));
+        
+        StartCoroutine(getData(url, form, true));
 
     }
 
@@ -281,14 +281,25 @@ public class ghsUtility : MonoBehaviour {
         StartCoroutine(getUserIcon(uri));
     }
 
-    IEnumerator getData(WWW www) {
-        yield return www;
+    IEnumerator getData(string url, WWWForm form, bool postType) {
+        UnityWebRequest www;
+        if (postType) {
+            using (www = UnityWebRequest.Post(url, form)) {
+                yield return www.SendWebRequest();
 
-        ghs = JsonUtility.FromJson<ghsObj>(www.text);
-
-        if (ghs.success == "true") {
-            saveData(ghs);
+                if (www.isNetworkError || www.isHttpError) {
+                    Debug.Log(www.error);
+                }
+            }
+        } else {
+            
         }
+
+        // ghs = JsonUtility.FromJson<ghsObj>(www.text);
+
+        // if (ghs.success == "true") {
+        //     saveData(ghs);
+        // }
     }
 
     IEnumerator getUserIcon(string uri) {

@@ -1,36 +1,65 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Monetization;
 using System.Collections;
-using UnityEngine.Advertisements; // Using the Unity Ads namespace.
+using UnityEngine.UI;
 
-public class adManager : MonoBehaviour{
+[RequireComponent(typeof(Button))]
+public class adManager : MonoBehaviour {
+    private string placementId = "rewardedVideo";
+    private Button adBtn;
+    private GameObject player;
+    private controller ctrl;
+    
+    #if UNITY_IOS
+        private string gameID = "1308889";
+    
+    #elif UNITY_ANDROID
+        private string gameID = "1308888";
+    
+    #endif
 
-    public void ShowRewardedAd(){
+    void Start() {
+        adBtn = GetComponent<Button>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
-        if (Advertisement.IsReady("rewardedVideo")){
+        if (adBtn) {
+            adBtn.onClick.AddListener(showAd);
+        }
 
-            var options = new ShowOptions { resultCallback = HandleShowResult };
-            Advertisement.Show("rewardedVideo", options);
+        if (player) {
+            ctrl = player.GetComponent<controller>();
+        }
+
+        if (Monetization.isSupported) {
+            Monetization.Initialize (gameID, true);
         }
     }
 
-    private void HandleShowResult(ShowResult result){
-
-        switch (result){
-
-            case ShowResult.Finished:
-
-                Debug.Log("The ad was successfully shown.");
-                
-                break;
-
-            case ShowResult.Skipped:
-                Debug.Log("The ad was skipped before reaching the end.");
-                break;
-
-            case ShowResult.Failed:
-                Debug.LogError("The ad failed to be shown.");
-                break;
+    void Update() {
+        if (adBtn) {
+            adBtn.interactable = Monetization.IsReady (placementId);
         }
     }
+    
+    void showAd () {
+        ShowAdCallbacks options = new ShowAdCallbacks ();
+        options.finishCallback = HandleShowResult;
+        ShowAdPlacementContent ad = Monetization.GetPlacementContent (placementId) as ShowAdPlacementContent;
+        ad.Show (options);
+    }
 
+    void HandleShowResult (ShowResult result) {
+        if (result == ShowResult.Finished) {
+            // Reward the player
+            if (ctrl) {
+                ctrl.liveCount(1);
+            }
+            
+        } else if (result == ShowResult.Skipped) {
+            Debug.LogWarning ("The player skipped the video - DO NOT REWARD!");
+        } else if (result == ShowResult.Failed) {
+            Debug.LogError ("Video failed to show");
+        }
+    }
 }

@@ -50,7 +50,7 @@ public class selectScreen : MonoBehaviour {
 
         if (File.Exists(Application.persistentDataPath + "/WorldDefer/temp/shipList.ghs") == false) {
             saveShips(ship);
-            Debug.LogError("Saved");
+            Debug.Log("Saved");
         }
 
         getShips();
