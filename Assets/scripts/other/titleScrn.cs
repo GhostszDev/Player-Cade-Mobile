@@ -59,6 +59,5 @@ public class titleScrn : MonoBehaviour {
 
     public void Start() {
         createDirs();
-        ghsUtility.Instance.initGSignIn();
     }
 }

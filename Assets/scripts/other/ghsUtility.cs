@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.Networking;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -96,48 +96,44 @@ public class ghsUtility : MonoBehaviour {
 
     #region Google
 
-    public void initGSignIn() {
+    public void googleSignIn()
+    {
 
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().RequestIdToken().Build();
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+            .EnableSavedGames()
+            .RequestIdToken()
+            .Build();
         PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
-
-        Social.localUser.Authenticate((bool success) => {
-            if (!success) {
-                // Couldn't connect, should probably show an error
-                Debug.Log("Logging in; Failed");
-            } else {
-                ghs = loadSaveData();
-                ghs.google = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
-                if (ghs.google != null) {
-                    saveData(ghs);
-                }
-                ghs.userName = Social.localUser.userName;
-                saveImage(Social.localUser.image, "user_icon.png");
-            }
-        });
-    }
-
-    public void googleSignIn() {
-
-        if (!Social.localUser.authenticated) {
-            Social.localUser.Authenticate((bool success) => {
-                if (!success) {
-                    // Couldn't connect, should probably show an error
-                    Debug.Log("Logging in; Failed");
-                } else {
+        
+        if (Social.localUser.authenticated) {
+            PlayGamesPlatform.Instance.SignOut();
+        } else {
+            PlayGamesPlatform.Instance.Authenticate((bool success) => {
+                if (success) {
+                    Debug.Log("Signed In");
                     ghs = loadSaveData();
-//                    ghs.google = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
-//                    if (ghs.google != null) {
-//                        saveData(ghs);
-//                    }
-//                    ghs.userName = Social.localUser.userName;
-//                    saveImage(Social.localUser.image, "user_icon.png");
+                    if (((PlayGamesLocalUser) Social.localUser).GetIdToken() == null || ((PlayGamesLocalUser) Social.localUser).GetIdToken() == "") {
+                        ghs.google = ((PlayGamesLocalUser) Social.localUser).GetIdToken();
+                    }
+
+                    if (ghs.user_icon == null) {
+                        saveImage(Social.localUser.image, "user_icon");
+                    }
+
+                    if (string.IsNullOrEmpty(ghs.name)) {
+                        ghs.name = Social.localUser.userName;
+                    }
+                    
+                    saveData(ghs);
+                } else {
+                  Debug.LogError("Failed to sign in!");  
                 }
             });
-        } else {
-            PlayGamesPlatform.Instance.SignOut();
+            
         }
+        
     }
 
     #endregion

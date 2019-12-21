@@ -24,11 +24,11 @@
 
 public static class GPGSIds
 {
+        public const string achievement_highscore_king = "CgkIl6DK5sQfEAIQAg"; // <GPGSID>
+        public const string achievement_millionaires_club = "CgkIl6DK5sQfEAIQAA"; // <GPGSID>
         public const string achievement_ghostmusic_memeber = "CgkIl6DK5sQfEAIQBA"; // <GPGSID>
         public const string achievement_g_membership = "CgkIl6DK5sQfEAIQAw"; // <GPGSID>
-        public const string achievement_millionaires_club = "CgkIl6DK5sQfEAIQAA"; // <GPGSID>
         public const string achievement_billionaires_boys_club = "CgkIl6DK5sQfEAIQBQ"; // <GPGSID>
-        public const string achievement_highscore_king = "CgkIl6DK5sQfEAIQAg"; // <GPGSID>
         public const string leaderboard_world_defer_leaders = "CgkIl6DK5sQfEAIQBg"; // <GPGSID>
 
 }

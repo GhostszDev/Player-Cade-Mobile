@@ -149,16 +149,18 @@ public class settingsScr : MonoBehaviour {
 
     public void checkSocialStatus(ghsObj g) {
 
-        if (g.token.Length >= 2) {
-            ghsCheck.text = socialSuccess;
-        } else {
-            ghsCheck.text = socialFail;
-        }
+        if (g != null) {
+            if (g.token.Length >= 2) {
+                ghsCheck.text = socialSuccess;
+            } else {
+                ghsCheck.text = socialFail;
+            }
 
-        if (Social.localUser.authenticated) {
-            googCheck.text = socialSuccess;
-        } else {
-            googCheck.text = socialSuccess;
+            if (Social.localUser.authenticated) {
+                googCheck.text = socialSuccess;
+            } else {
+                googCheck.text = socialSuccess;
+            }
         }
 
 
@@ -185,7 +187,10 @@ public class settingsScr : MonoBehaviour {
         ghsObj = ghs.getData();
         setData(ghsObj);
         ghsObj = ghs.getData();
-        checkSocialStatus(ghsObj);
+        
+        if (ghsObj != null) {
+            checkSocialStatus(ghsObj);
+        }
 
     }
 
