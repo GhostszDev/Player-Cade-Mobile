@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -18,13 +19,36 @@ public class ghsObj{
     public string token;
     public string name;
     public string userName;
+    public string password;
     public string google;
     public string facebook;
     public string user_icon;
     public int score;
     public string useBlob;
+    public string error_message;
 
     //google play services stuff
+
+}
+
+[System.Serializable]
+public class Ships {
+
+    public string shipName;
+    public string unlocked;
+    public string desc;
+    public string lockedDesc;
+    public bool isLocked;
+
+    public Ships(string newName, string isUnlocked, string newDesc, 
+        string newLockedDesc, bool newIsLocked) {
+        shipName = newName;
+        unlocked = isUnlocked;
+        desc = newDesc;
+        lockedDesc = newLockedDesc;
+        isLocked = newIsLocked;
+
+    }
 
 }
 
@@ -53,9 +77,12 @@ public class ghsUtility : MonoBehaviour {
     public string dataPath;
     public string userInfo;
     public string info;
+    private settingsScr settings;
+    public Scene scene;
+    public string sceneName;
 
     #region Achievements
-    public static void unloachAchievement(string id) {
+    public static void unlockAchievement(string id) {
 
         Social.ReportProgress(id, 100, success => { });
 
@@ -76,10 +103,18 @@ public class ghsUtility : MonoBehaviour {
 
     #region LeaderBoard
 
-    public void addScoreToLB(string leaderBoard, long score) {
+    public void addScoreToLB(string leaderBoard, long score)
+    {
 
+        PlayGamesPlatform.Activate();
         if (Social.localUser.authenticated) {
-            Social.ReportScore(score, leaderBoard, success => { });
+            Social.ReportScore(score, leaderBoard, (bool success) => {
+                if (success) {
+                    Debug.Log("Score added to leaderboard!");
+                } else {
+                   Debug.LogError("Not able to add score to leaderboard!");
+                }
+            });
         } else {
             Debug.LogError("This user's score can't be posted!");
         }
@@ -99,14 +134,6 @@ public class ghsUtility : MonoBehaviour {
     public void googleSignIn()
     {
 
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-            .EnableSavedGames()
-            .RequestIdToken()
-            .Build();
-        PlayGamesPlatform.InitializeInstance(config);
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
-        
         if (Social.localUser.authenticated) {
             PlayGamesPlatform.Instance.SignOut();
         } else {
@@ -114,18 +141,8 @@ public class ghsUtility : MonoBehaviour {
                 if (success) {
                     Debug.Log("Signed In");
                     ghs = loadSaveData();
-                    if (((PlayGamesLocalUser) Social.localUser).GetIdToken() == null || ((PlayGamesLocalUser) Social.localUser).GetIdToken() == "") {
-                        ghs.google = ((PlayGamesLocalUser) Social.localUser).GetIdToken();
-                    }
-
-                    if (ghs.user_icon == null) {
-                        saveImage(Social.localUser.image, "user_icon");
-                    }
-
-                    if (string.IsNullOrEmpty(ghs.name)) {
-                        ghs.name = Social.localUser.userName;
-                    }
-                    
+                    Debug.Log("Google Username: " + Social.localUser.userName);
+                    unlockAchievement(GPGSIds.achievement_g_membership);
                     saveData(ghs);
                 } else {
                   Debug.LogError("Failed to sign in!");  
@@ -144,8 +161,6 @@ public class ghsUtility : MonoBehaviour {
     public void ghsSignIn(string userName, string password) {
         string url = site;
         url += "login";
-
-//        Debug.Log("Url: " + url);
 
         WWWForm form = new WWWForm();
 
@@ -278,24 +293,36 @@ public class ghsUtility : MonoBehaviour {
     }
 
     IEnumerator getData(string url, WWWForm form, bool postType) {
-        UnityWebRequest www;
-        if (postType) {
-            using (www = UnityWebRequest.Post(url, form)) {
-                yield return www.SendWebRequest();
+        if (postType)
+        {
+            ghsObj oldGhsObj = ghs;
 
-                if (www.isNetworkError || www.isHttpError) {
-                    Debug.Log(www.error);
-                }
+            UnityWebRequest www = UnityWebRequest.Post(url, form);
+            yield return www.SendWebRequest();
+ 
+            if(www.isNetworkError || www.isHttpError) {
+                Debug.Log(www.error);
             }
+            else {
+                Debug.Log(www.downloadHandler.text);
+                ghs = JsonUtility.FromJson<ghsObj>(www.downloadHandler.text);
+                if (oldGhsObj.score > 0)
+                {
+                    ghs.score = oldGhsObj.score;
+                }
+
+                if (settings)
+                {
+                    ghs.userName = settings.userNameSignIn.text;
+                    ghs.password = settings.passwordSignIn.text;
+                    settings.setData(ghs);
+                }
+                saveData(ghs);
+            }
+
         } else {
             
         }
-
-        // ghs = JsonUtility.FromJson<ghsObj>(www.text);
-
-        // if (ghs.success == "true") {
-        //     saveData(ghs);
-        // }
     }
 
     IEnumerator getUserIcon(string uri) {
@@ -311,17 +338,18 @@ public class ghsUtility : MonoBehaviour {
     }
 
     void Start() {
-
-//        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-//            .EnableSavedGames()
-//            .RequestIdToken()
-//            .Build();
-//        PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.Activate();
-        site = "https://ghostszmusic.com/wp-json/ghs_api/v1/";
+        site = "https://ghostszmusic.com/api/ghs-api/v1/"; 
         ghs = getData();
         dataPath = Application.persistentDataPath + "/WorldDefer/saves/save.sav";
         Instance = this;
+        scene = SceneManager.GetActiveScene();
+        sceneName = scene.name;
+
+        if (sceneName == "Settings") {
+            settings = GetComponent<settingsScr>();
+        }
+
     }
 
 }

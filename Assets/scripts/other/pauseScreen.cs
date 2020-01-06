@@ -102,14 +102,14 @@ public class pauseScreen : MonoBehaviour {
     }
 
     public void gameOverQuit() {
-
-        int score = int.Parse(sm.scoreTXT.text);
+	    
+	    int score = int.Parse(sm.scoreTXT.text);
+	    ghs = gu.getData();
         ghs.score = score;
         ghsUtility.saveData(ghs);
         
-        if (Social.localUser.authenticated) {
-            gu.addScoreToLB(GPGSIds.leaderboard_world_defer_leaders, score);
-        }
+        Debug.Log("Score: " + score);
+	    gu.addScoreToLB(GPGSIds.leaderboard_world_defenders, score);
 
         quitGame();
         

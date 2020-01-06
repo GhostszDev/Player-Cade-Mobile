@@ -14,6 +14,7 @@ public class settingsScr : MonoBehaviour {
     public GameObject signInObj;
     public GameObject signUpObj;
     public Text popUpTitle;
+    public Text popUperrorMsg;
     public InputField userNameSignIn;
     public InputField passwordSignIn;
     public Button btnSignIn;
@@ -64,10 +65,13 @@ public class settingsScr : MonoBehaviour {
         ghs.ghsSignIn(userNameSignIn.text, passwordSignIn.text);
 
         ghsObj = ghs.getData();
-
+        
         if (ghsObj.success == "true") {
             disableAll();
             setData(ghsObj);
+            getUserIcon("true", ghsObj.user_icon);
+        } else {
+            popUperrorMsg.text = ghsObj.error_message;
         }
         
     }
@@ -91,6 +95,7 @@ public class settingsScr : MonoBehaviour {
         }
 
         popUpTitle = popUpInst.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        popUperrorMsg = popUpInst.transform.GetChild(0).GetChild(1).GetComponent<Text>();
         signInObj = popUpInst.transform.GetChild(1).gameObject;
         signUpObj = popUpInst.transform.GetChild(2).gameObject;
         userNameSignIn = signInObj.transform.GetChild(0).GetComponent<InputField>();
@@ -107,10 +112,10 @@ public class settingsScr : MonoBehaviour {
     }
 
     public void setData(ghsObj g) {
-        if (g.userName == null) {
+        if (g.name == null) {
             userName.text = "UserName";
         } else {
-            userName.text = g.userName;
+            userName.text = g.name;
         }
  
         if (g.user_icon == null) {
@@ -118,26 +123,21 @@ public class settingsScr : MonoBehaviour {
         } else {
             getUserIcon(g.useBlob, g.user_icon);
         }
-
+        
         checkSocialStatus(g);
 
     }
 
     public void getUserIcon(string useBlob, string blob) {
 
-        if (useBlob == "true") {
+        if (useBlob == "true")
+        {
 
-            string base64Decoded;
-            byte[] data = Convert.FromBase64String(blob);
-            base64Decoded = System.Text.ASCIIEncoding.ASCII.GetString(data);
-            string[] base64split = base64Decoded.Split(',');
-
-            byte[] Bytes = System.Convert.FromBase64String(base64split[1]);
-            Texture2D tex = new Texture2D(500, 700);
-            tex.LoadImage(Bytes);
-            ghs.saveImage(tex, "user_icon.png");
-            Rect rect = new Rect(0, 0, tex.width, tex.height);
-            userIcon.sprite = Sprite.Create(tex, rect, new Vector2(), 100f);
+            Texture2D txt2d;
+            byte[] bytes = System.Convert.FromBase64String(blob);
+            txt2d = new Texture2D(1,1);
+            txt2d.LoadImage( bytes);
+            userIcon.sprite = Sprite.Create(txt2d, new Rect(0.0f, 0.0f, txt2d.width, txt2d.height), new Vector2(0.5f, 0.5f));
 
         } else {
 
@@ -186,11 +186,10 @@ public class settingsScr : MonoBehaviour {
 
         ghsObj = ghs.getData();
         setData(ghsObj);
-        ghsObj = ghs.getData();
-        
-        if (ghsObj != null) {
-            checkSocialStatus(ghsObj);
-        }
+
+        // if (ghsObj != null) {
+        //     checkSocialStatus(ghsObj);
+        // }
 
     }
 
@@ -203,8 +202,6 @@ public class settingsScr : MonoBehaviour {
         } else if (!signUpBool && !signInBool) {
             disableAll();
         }
-
-        InvokeRepeating("checkSocialFun", 300f, 0f);
 
     }
 }

@@ -34,7 +34,11 @@ public class controller : MonoBehaviour{
     public bool rewarded;
 
     private RaycastHit hitObj;
+#if UNITY_EDITOR
+    public float lives;
+    #else
     private float lives;
+#endif
     private Rigidbody2D rb;
     public float vTimer;
     private float maxVTimer = 3.0f;

@@ -74,43 +74,43 @@
      <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.131.0.txt" />
      <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
  <Reference Include="UnityEditor.TestRunner">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Monetization">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Volumes/HDD/Unity/2019.2.17f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -319,23 +319,23 @@
  <Reference Include="UnityEditor.AppleTV.Extensions">
  <HintPath>/Volumes/HDD/Unity/2019.2.17f1/PlaybackEngines/AppleTVSupport/UnityEditor.AppleTV.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="Google.VersionHandler">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Advertisements">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/PackageCache/com.unity.ads@3.4.1/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <Reference Include="Google.IOSResolver_v1.2.131.0">
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.131.0.dll</HintPath>
  </Reference>
  <Reference Include="Google.JarResolver_v1.2.131.0">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.131.0.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.131.0.dll</HintPath>
  </Reference>
- <Reference Include="Google.IOSResolver_v1.2.131.0">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.131.0.dll</HintPath>
+ <Reference Include="Google.VersionHandler">
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
  </Reference>
  <Reference Include="Google.VersionHandlerImpl_v1.2.131.0">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.131.0.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.131.0.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Advertisements">
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/PackageCache/com.unity.ads@3.4.1/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Volumes/HDD/Unity/2019.2.17f1/PlaybackEngines/AppleTVSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

@@ -7,27 +7,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class Ships {
-
-    public string shipName;
-    public string unlocked;
-    public string desc;
-    public string lockedDesc;
-    public bool isLocked;
-
-    public Ships(string newName, string isUnlocked, string newDesc, 
-        string newLockedDesc, bool newIsLocked) {
-        shipName = newName;
-        unlocked = isUnlocked;
-        desc = newDesc;
-        lockedDesc = newLockedDesc;
-        isLocked = newIsLocked;
-
-    }
-
-}
-
 public class selectScreen : MonoBehaviour {
 
     public int shipNum;
@@ -42,6 +21,7 @@ public class selectScreen : MonoBehaviour {
     public Text shipDesc;
     public static selectScreen Instance { get; private set; }
     public temp temp;
+    public ghsUtility gu;
 
     void shipsList() {
 
@@ -88,7 +68,7 @@ public class selectScreen : MonoBehaviour {
     void selectShip(int s) {
 
         sn = prevList[s].shipName;
-        ghsUtility.Instance.addTmpShip(sn);
+        gu.addTmpShip(sn);
 
 
     }
@@ -159,10 +139,7 @@ public class selectScreen : MonoBehaviour {
         shipNum = 0;
         shipsList();
         displayShip(0);
-		
-	}
+        gu = GetComponent<ghsUtility>();
 
-    void Update() {
-        
     }
 }

@@ -144,37 +144,37 @@
      <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
      <None Include="Assets\shaders\DefaultColorFlash.shader" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Monetization">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/stevenrivera/Desktop/code/Player Cade/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Volumes/HDD/projects/unity/Player Cade/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Volumes/HDD/Unity/2019.2.17f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
