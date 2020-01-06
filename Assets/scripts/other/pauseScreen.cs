@@ -44,9 +44,10 @@ public class pauseScreen : MonoBehaviour {
         preGOHS.text = sm.scoreTXT.text;
 	    getUserIcon(ghs.useBlob, ghs.user_icon, userIconPS);
 	    getUserIcon(ghs.useBlob, ghs.user_icon, userIconGOS);
-	    if (ghs.userName != null){
-	        userNamePS.text = ghs.userName;
-	        userNameGOS.text = ghs.userName;
+	    
+	    if (ghs.name != null){
+	        userNamePS.text = ghs.name;
+	        userNameGOS.text = ghs.name;
 	    } else {
 	        userNamePS.text = "username";
 	        userNameGOS.text = "username";
@@ -58,16 +59,11 @@ public class pauseScreen : MonoBehaviour {
 
         if (useBlob == "true") {
 
-            string base64Decoded;
-            byte[] data = Convert.FromBase64String(blob);
-            base64Decoded = System.Text.ASCIIEncoding.ASCII.GetString(data);
-            string[] base64split = base64Decoded.Split(',');
-
-            byte[] Bytes = System.Convert.FromBase64String(base64split[1]);
-            Texture2D tex = new Texture2D(500, 700);
-            tex.LoadImage(Bytes);
-            Rect rect = new Rect(0, 0, tex.width, tex.height);
-            userIcon.sprite = Sprite.Create(tex, rect, new Vector2(), 100f);
+	        Texture2D txt2d;
+	        byte[] bytes = System.Convert.FromBase64String(blob);
+	        txt2d = new Texture2D(1,1);
+	        txt2d.LoadImage( bytes);
+	        userIcon.sprite = Sprite.Create(txt2d, new Rect(0.0f, 0.0f, txt2d.width, txt2d.height), new Vector2(0.5f, 0.5f));
 
         } else {
 
