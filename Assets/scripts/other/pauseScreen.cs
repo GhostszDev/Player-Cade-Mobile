@@ -42,16 +42,21 @@ public class pauseScreen : MonoBehaviour {
         ghs = gu.getData();
         preHS.text = sm.scoreTXT.text;
         preGOHS.text = sm.scoreTXT.text;
-	    getUserIcon(ghs.useBlob, ghs.user_icon, userIconPS);
-	    getUserIcon(ghs.useBlob, ghs.user_icon, userIconGOS);
-	    
-	    if (ghs.name != null){
+
+        if (ghs.user_icon != null) {
+	        getUserIcon(ghs.useBlob, ghs.user_icon, userIconPS);
+	        getUserIcon(ghs.useBlob, ghs.user_icon, userIconGOS);
+        }
+
+        if (ghs.name != null){
 	        userNamePS.text = ghs.name;
 	        userNameGOS.text = ghs.name;
 	    } else {
 	        userNamePS.text = "username";
 	        userNameGOS.text = "username";
 	    }
+        
+        rewardBtn.enabled = !con.rewarded;
 
 	}
     
@@ -101,11 +106,19 @@ public class pauseScreen : MonoBehaviour {
 	    
 	    int score = int.Parse(sm.scoreTXT.text);
 	    ghs = gu.getData();
-        ghs.score = score;
         ghsUtility.saveData(ghs);
         
         Debug.Log("Score: " + score);
-	    gu.addScoreToLB(GPGSIds.leaderboard_world_defenders, score);
+        if (Social.localUser.authenticated) {
+	        gu.addScoreToLB(GPGSIds.leaderboard_world_defenders, score);
+        }
+
+        if (ghs.token != null) {
+	        if (score >= 100 && score > ghs.score) {
+		        ghs.score = score;
+		        StartCoroutine(gu.ghsSendScore(score));
+	        }
+        }
 
         quitGame();
         

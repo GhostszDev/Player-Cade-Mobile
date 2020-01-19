@@ -175,24 +175,6 @@ public class ghsUtility : MonoBehaviour {
 
     public void ghsSignUp() { }
 
-    public void sendScore(string token, int score) {
-
-        string url = site;
-        url += "sendScore";
-
-        //Debug.Log("Url: " + url);
-
-        WWWForm form = new WWWForm();
-
-        Dictionary<string, string> headers = form.headers;
-
-        form.AddField("user_login", token);
-        form.AddField("user_password", score);
-        
-        StartCoroutine(getData(url, form, true));
-
-    }
-
     public static void saveData(ghsObj g) {
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -290,6 +272,25 @@ public class ghsUtility : MonoBehaviour {
 
     public void urlToBase64(string uri) {
         StartCoroutine(getUserIcon(uri));
+    }
+
+    public IEnumerator ghsSendScore(int score)
+    {
+
+        string url = site;
+        url += "addScore";
+        
+        WWWForm form = new WWWForm();
+        form.AddField("Game", "WorldDefer");
+        form.AddField("score", score);
+        
+        UnityWebRequest www = UnityWebRequest.Post(url, form);
+        yield return www.SendWebRequest();
+        
+        if(www.isNetworkError || www.isHttpError) {
+            Debug.Log(www.error);
+        }
+
     }
 
     IEnumerator getData(string url, WWWForm form, bool postType) {

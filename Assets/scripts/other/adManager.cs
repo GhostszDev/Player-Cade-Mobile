@@ -53,7 +53,7 @@ public class adManager : MonoBehaviour {
         if (result == ShowResult.Finished) {
             // Reward the player
             if (ctrl) {
-                ctrl.liveCount(1);
+                ctrl.adRewardRespawn();
             }
             
         } else if (result == ShowResult.Skipped) {

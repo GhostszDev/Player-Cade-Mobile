@@ -80,6 +80,15 @@ public class controller : MonoBehaviour{
 
         if (lives > 0 && preShip == null && preExposve == null){
             spawnPlayer();
+            if (prePM != null)
+            {
+                Destroy(prePM);
+            }
+
+            if (Time.timeScale < 1)
+            {
+                Time.timeScale = 1;
+            }
         } else if (lives <= 0) {
             lives = 0;
             gameOverScreen();
@@ -93,16 +102,26 @@ public class controller : MonoBehaviour{
 
         if (vTimer <= 0){
             vTimer = 0;
-            bc2D.enabled = true;
+        }
+
+        while (vTimer > 0) {
+            preShip.SetActive(false);
+            preShip.SetActive(true);
         }
 
     }
 
     public void move(float m){
-
+        
         if (preShip != null) {
             speed = Screen.width / 14 * m;
-            rb.velocity = new Vector2(speed, 0f);
+
+            if (this.gameObject.transform.position.x < ((Screen.width/2) - 60f) 
+                && this.gameObject.transform.position.x > -((Screen.width/2) - 60f)) {
+                rb.velocity = new Vector2(speed, 0f);
+            }
+        } else {
+            rb.velocity = Vector2.zero;
         }
 
     }
@@ -131,7 +150,7 @@ public class controller : MonoBehaviour{
 
     } 
 
-    void spawnPlayer(){
+    public void spawnPlayer(){
 
         string sn = loadTempData();
         vulnerabilityState();
@@ -175,9 +194,20 @@ public class controller : MonoBehaviour{
 
     }
 
+    public void adRewardRespawn() {
+        
+        liveCount(1);
+        rewarded = true;
+        Destroy(prePM);
+        if (Time.timeScale == 0f) {
+            Time.timeScale = 1f;
+        }
+        spawnPlayer();
+
+    }
+
     void vulnerabilityState() {
         vTimer = maxVTimer;
-        bc2D.enabled = false;
     }
 
     void death() {
@@ -244,13 +274,13 @@ public class controller : MonoBehaviour{
 
     void OnTriggerEnter2D(Collider2D coll) {
 
-    if (coll.gameObject.tag == "bullet") {
-    death();
-    }
+        if (coll.gameObject.tag == "bullet") {
+            death();
+        }
 
-    if (coll.gameObject.tag == "enemy") {
-    death();
-    }
+        if (coll.gameObject.tag == "enemy") {
+            death();
+        }
 
     }
 }
