@@ -124,7 +124,7 @@ public class settingsScr : MonoBehaviour {
             getUserIcon(g.useBlob, g.user_icon);
         }
         
-        checkSocialStatus(g);
+        // checkSocialStatus(g);
 
     }
 
@@ -133,12 +133,11 @@ public class settingsScr : MonoBehaviour {
         if (useBlob == "true")
         {
 
-            Texture2D txt2d;
-            byte[] bytes = System.Convert.FromBase64String(blob);
-            txt2d = new Texture2D(1,1);
-            txt2d.LoadImage( bytes);
-            userIcon.sprite = Sprite.Create(txt2d, new Rect(0.0f, 0.0f, txt2d.width, txt2d.height), new Vector2(0.5f, 0.5f));
-
+            byte[]  imageBytes = Convert.FromBase64String(blob);
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage( imageBytes );
+            userIcon.sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+            
         } else {
 
             ghs.urlToBase64(blob);
@@ -155,7 +154,7 @@ public class settingsScr : MonoBehaviour {
             } else {
                 ghsCheck.text = socialFail;
             }
-
+        
             if (Social.localUser.authenticated) {
                 googCheck.text = socialSuccess;
             } else {
@@ -187,9 +186,9 @@ public class settingsScr : MonoBehaviour {
         ghsObj = ghs.getData();
         setData(ghsObj);
 
-        // if (ghsObj != null) {
-        //     checkSocialStatus(ghsObj);
-        // }
+        if (ghsObj != null) {
+            checkSocialStatus(ghsObj);
+        }
 
     }
 

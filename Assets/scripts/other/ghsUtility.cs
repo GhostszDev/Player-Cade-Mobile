@@ -161,15 +161,16 @@ public class ghsUtility : MonoBehaviour {
     public void ghsSignIn(string userName, string password) {
         string url = site;
         url += "login";
+        // Debug.Log(site);
 
         WWWForm form = new WWWForm();
 
         Dictionary<string, string> headers = form.headers;
 
-        form.AddField("user_login", userName);
-        form.AddField("user_password", password);
+        form.AddField("user", userName);
+        form.AddField("password", password);
         
-        StartCoroutine(getData(url, form, true));
+        StartCoroutine(getURLData(url, form, true));
 
     }
 
@@ -293,7 +294,7 @@ public class ghsUtility : MonoBehaviour {
 
     }
 
-    IEnumerator getData(string url, WWWForm form, bool postType) {
+    IEnumerator getURLData(string url, WWWForm form, bool postType) {
         if (postType)
         {
             ghsObj oldGhsObj = ghs;
@@ -305,7 +306,7 @@ public class ghsUtility : MonoBehaviour {
                 Debug.Log(www.error);
             }
             else {
-                Debug.Log(www.downloadHandler.text);
+                // Debug.Log(www.downloadHandler.text);
                 ghs = JsonUtility.FromJson<ghsObj>(www.downloadHandler.text);
                 if (oldGhsObj.score > 0)
                 {
@@ -340,7 +341,12 @@ public class ghsUtility : MonoBehaviour {
 
     void Start() {
         PlayGamesPlatform.Activate();
-        site = "https://ghostszmusic.com/api/ghs-api/v1/"; 
+		site = "https://ghostszmusic.com/api/ghs_api/v1/";
+
+		#if UNITY_EDITOR
+        site = "http://localhost:3000/api/ghs_api/v1/";
+		#endif
+
         ghs = getData();
         dataPath = Application.persistentDataPath + "/WorldDefer/saves/save.sav";
         Instance = this;
