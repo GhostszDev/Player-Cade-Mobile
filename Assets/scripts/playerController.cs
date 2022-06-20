@@ -20,6 +20,7 @@ public class playerController : MonoBehaviour
     public GameObject[] cannon;
     public float maxShootTimer = 5f;
     public float shootTimer = 5f;
+    public int currentPOS = 0;
 
     void ShipShot()
     {
@@ -104,7 +105,7 @@ public class playerController : MonoBehaviour
     {
         _manager = manager.Instance;
         _ghsUtility = GHS_Utility.Instance;
-        currentShip = _manager.GetSelectedShip();
+        currentShip = _manager.GetSelectedShip(currentPOS);
         player = this.gameObject;
 
         if (player)

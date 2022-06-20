@@ -46,7 +46,7 @@ public class ship
 public class tempFile
 {
     public string selectedMode;
-    public ship selectedShip;
+    public int selectedShip;
 }
 
 public class manager : MonoBehaviour
@@ -129,8 +129,10 @@ public class manager : MonoBehaviour
 
     }
 
-    private void SelectedShip(ship selectedShip)
+    public void SelectedShip(int pos)
     {
+        PlayerPrefs.SetInt("shipPOS", pos);
+        SceneManager.LoadScene(PlayerPrefs.GetString("GameMode"));
         
     }
 
@@ -152,20 +154,20 @@ public class manager : MonoBehaviour
         }
     }
 
-    public void SelectShip(ship selectShip)
+    public void SelectShip(int selectShip)
     {
         SelectedShip(selectShip);
     }
 
-    public ship GetSelectedShip()
+    public ship GetSelectedShip(int pos = 0)
     {
         if (isDemo())
         {
-            return ship[0];
+            return ship[pos];
         }
         else
         {
-            return ship[0];
+            return ship[pos];
         }
 
         return null;
