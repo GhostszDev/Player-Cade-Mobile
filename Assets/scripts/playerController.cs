@@ -8,10 +8,10 @@ public class playerController : MonoBehaviour
 {
     private manager _manager;
     private GHS_Utility _ghsUtility;
-    private float speed = Screen.width*10;
+    private float speed;
     private Rigidbody2D fb2d;
     public int currentLvl;
-    
+
     public GameObject player;
     public Image playerShip;
     public ship currentShip;
@@ -34,7 +34,7 @@ public class playerController : MonoBehaviour
         
     }
     
-    void ShipMovement(float movement)
+    public void ShipMovement(float movement)
     {
         fb2d.velocity = new Vector2(speed * movement * Time.fixedDeltaTime, 0f);
     }
@@ -81,23 +81,11 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void CreateBoxColliders(string shipName)
+    void CreateBoxColliders(ship s)
     {
-        Debug.Log(shipName);
-        
-        switch (shipName)
-        {
-            case "purpleShip":
-            case "Purple Ship":
-                BoxCollider2D box2d = player.AddComponent<BoxCollider2D>();
-                box2d.offset = new Vector2(-0.82585907f,-19.4520264f);
-                box2d.size = new Vector2(39.7197113f,149.799316f);
-            
-                BoxCollider2D wings = player.AddComponent<BoxCollider2D>();
-                wings.offset = new Vector2(-0.190734863f,-47.9602661f);
-                wings.size = new Vector2(149.968506f, 91.1588135f);
-                break;
-        }
+        BoxCollider2D box2d = player.AddComponent<BoxCollider2D>();
+        box2d.offset = s.offset;
+        box2d.size = s.size;
     }
 
     // Start is called before the first frame update
@@ -105,7 +93,8 @@ public class playerController : MonoBehaviour
     {
         _manager = manager.Instance;
         _ghsUtility = GHS_Utility.Instance;
-        currentShip = _manager.GetSelectedShip(currentPOS);
+        currentShip = _manager.GetSelectedShip();
+        speed = Screen.width * (currentShip.speed * 10f);
         player = this.gameObject;
 
         if (player)
@@ -118,10 +107,14 @@ public class playerController : MonoBehaviour
             fb2d = this.gameObject.GetComponent<Rigidbody2D>();
             fb2d.constraints = RigidbodyConstraints2D.FreezePositionY;
 
-            player.transform.localPosition = new Vector3(0, 200, 0);
+            if (_manager.isDemo())
+            {
+                player.transform.localPosition = new Vector3(0, 200, 0);
+            }
+
             playerShip = player.transform.GetChild(0).gameObject.GetComponent<Image>();
 
-            CreateBoxColliders(currentShip.shipName);
+            CreateBoxColliders(currentShip);
             
             playerShip.sprite = currentShip.shipImage;
             playerShip.GetComponent<RectTransform>().localScale = currentShip.shipRectTransform;
@@ -155,10 +148,6 @@ public class playerController : MonoBehaviour
         if (_manager.isDemo())
         {
             DemoMovement();
-        }
-        else
-        {
-            
         }
     }
     
