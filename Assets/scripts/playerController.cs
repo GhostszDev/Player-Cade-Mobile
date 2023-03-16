@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
+    private static playerController _instance;
     private manager _manager;
     private GHS_Utility _ghsUtility;
     private float speed;
@@ -21,8 +22,16 @@ public class playerController : MonoBehaviour
     public float maxShootTimer = 5f;
     public float shootTimer = 5f;
     public int currentPOS = 0;
+    
+    public static playerController Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
 
-    void ShipShot()
+    public void ShipShot()
     {
 
         for (int i = 0; i < cannon.Length; i++)
@@ -86,6 +95,18 @@ public class playerController : MonoBehaviour
         BoxCollider2D box2d = player.AddComponent<BoxCollider2D>();
         box2d.offset = s.offset;
         box2d.size = s.size;
+    }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     // Start is called before the first frame update

@@ -60,6 +60,7 @@ public class manager : MonoBehaviour
     private static manager _instance;
     private int totalShips = 2, currentPOS = 0;
     private GHS_Utility _ghsUtility;
+    public playerController _playerController;
     private String storyMode = "Story", endlessMode = "Endless", settingMode = "", disabledBtnText = "";
     private Color btnNormalColor, btnDisableColor;
     private string currentScene, tempFile;
@@ -72,6 +73,9 @@ public class manager : MonoBehaviour
     public GameObject storyBtn, endlessBtn, settingsBtn, buttonGroup, controller;
     public Button shootBtn, leftBtn, rightBtn;
     public Vector2 move;
+    
+    float maxCount = 100f;
+    float countdown = 0f;
     
     //SelectScreen
     private TextMeshProUGUI selectScreenName, selectScreenDesc;
@@ -105,15 +109,17 @@ public class manager : MonoBehaviour
             _instance = this;
         }
 
+        if (currentScene == "endless")
+        {
+            _playerController = GameObject.FindWithTag("Player").GetComponent<playerController>();
+        }
+
         ghsInputs = new PlayerInputActions();
+        
         ghsInputs.GamePlay.Enable();
+        ghsInputs.GamePlay.Fire.performed += context => _actionBtn();
         
         shipList();
-    }
-
-    private void OnEnable()
-    {
-        // ghsInputs.GamePlay.Fire.performed += _actionBtn();
     }
 
     private bool IsPortrait()
@@ -365,7 +371,6 @@ public class manager : MonoBehaviour
         {
             deathBoxTop = new GameObject("deathBoxTop");
         }
-        
         if (GameObject.FindWithTag("deathBox"))
         {
             deathBox = GameObject.FindWithTag("deathBox");
@@ -432,32 +437,45 @@ public class manager : MonoBehaviour
 
     void _actionBtn()
     {
-        SelectedShip(currentPOS);
+        if (currentScene == "selectScreen")
+        {
+            SelectedShip(currentPOS);
+        }
+
+        if (currentScene == "endless")
+        {
+            _playerController.ShipShot();
+        }
     }
     
     void Update()
     {
 
+        move = ghsInputs.GamePlay.Move.ReadValue<Vector2>();
+
         if (currentScene == "selectScreen")
         {
 
-            if (currentPOS >= totalShips)
+            if (countdown > (totalShips-1))
             {
-                rightBtn.interactable = false;
-            }
-            else
-            {
-                rightBtn.interactable = true;
+                countdown = (totalShips-1);
             }
 
-            if (currentPOS == 0)
+            if (countdown < 0)
+            {
+                countdown = 0;
+            }
+
+            if (currentPOS < 0)
             {
                 currentPOS = 0;
-                leftBtn.interactable = false;
             }
-            else
+            
+            if (countdown >= 0 && countdown <= (totalShips-1))
             {
-                leftBtn.interactable = true;
+                countdown += move.x * 1 * Time.deltaTime;
+                currentPOS = Mathf.FloorToInt(countdown);
+                setShip(currentPOS);
             }
         }
 
@@ -466,6 +484,7 @@ public class manager : MonoBehaviour
     public void Start()
     {
         _ghsUtility = GHS_Utility.Instance;
+        _playerController = playerController.Instance;
         currentScene = SceneManager.GetActiveScene().name;
         btnDisableColor = new Color(.4f, .4f, .4f, 0.5f);;
         btnNormalColor = new Color(1f, 1f, 1f, 0.6f);
@@ -487,6 +506,7 @@ public class manager : MonoBehaviour
                 // gameLoopLoad();
             } else if (currentScene == "selectScreen")
             {
+                countdown = 0;
                 fetchAll();
                 setShip(0);
             }
